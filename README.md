@@ -1,2 +1,137 @@
-# synthetic_dataset_generator
-Generate an syntheticl dataset with Groq API using Llama3-70b
+# Synthetic News Generation
+
+## Overview
+
+This project generates a synthetic dataset of fictitious news articles using a language model, then processes the data to create a structured CSV file. The goal is to generate unique and diverse news articles on various topics and structure them for use in subsequent tasks like retrieval or further analysis.
+
+### Project Components:
+1. **News Generation Script**: Generates synthetic news articles using a language model (e.g., LLaMA).
+2. **CSV Conversion Script**: Processes the generated news articles and converts them into a CSV file with structured data (title, author, date, and content).
+
+## Project Structure
+
+```bash
+.
+├── generate_news.py                   # Script to generate synthetic news articles
+├── convert_to_csv_dataset.py          # Script to convert generated articles to CSV format
+├── synthetic_dataset_generation/      # Folder for generated articles and datasets
+│   ├── synthetic_news.txt             # Text file containing generated news articles
+│   └── synthetic_news.csv             # CSV file with parsed news articles
+└── README.md                          # Project documentation (this file)
+```
+
+## Requirements
+
+To run this project, you will need:
+
+- Python 3.8+
+- The following Python packages:
+  - `langchain-core`
+  - `langchain-groq`
+  - `dotenv`
+  - `random`
+  - `csv`
+  - `re`
+
+You can install the dependencies using `pip`:
+
+```bash
+pip install -r requirements.txt
+```
+
+## Scripts
+
+### 1. `generate_news.py`
+
+This script generates synthetic news articles across a variety of topics (e.g., Politics, Economy, Sports, Science). The articles are saved in a text file with each article separated by a line of dashes.
+
+#### Usage:
+
+```bash
+python generate_news.py
+```
+
+#### Key Features:
+
+- Generates between 500-1000 words per article.
+- Diverse topics: politics, economy, sports, science, culture, technology, etc.
+- Each article contains a **title**, **author**, **date**, and **content**.
+- Saves articles to `synthetic_dataset_generation/synthetic_news.txt`.
+
+#### Example Output (in text file):
+
+```
+**Title:** Breakthrough in Quantum Computing: Tech Giant NovaSphere Unveils Revolutionary New Processor
+**Author:** Alex Chen
+**Date:** March 20, 2027
+
+In a major breakthrough in the field of quantum computing...
+----------------------------------------------------------------------------------------------------
+**Title:** Revolutionary AI-Powered Quantum Computer Unveiled by Tech Giant, NovaTech
+**Author:** Emily Chen
+**Date:** March 25, 2027
+
+In a breakthrough announcement that is set to send shockwaves throughout the tech industry...
+----------------------------------------------------------------------------------------------------
+```
+
+### 2. `convert_to_csv_dataset.py`
+
+This script reads the generated news articles from the text file and parses them into a structured format. It extracts fields such as **title**, **author**, **date**, and **content** and stores them in a CSV file.
+
+#### Usage:
+
+```bash
+python convert_to_csv_dataset.py
+```
+
+#### Key Features:
+
+- Reads from the `synthetic_news.txt` file.
+- Extracts structured data: title, author, date, and content.
+- Saves the parsed data in `synthetic_news.csv`.
+
+#### Example CSV Output:
+
+| idx | title                                                                                 | author     | date         | content                                                                                                    |
+|-----|---------------------------------------------------------------------------------------|------------|--------------|------------------------------------------------------------------------------------------------------------|
+| 0   | Breakthrough in Quantum Computing: Tech Giant NovaSphere Unveils Revolutionary New...  | Alex Chen  | March 20, 2027 | In a major breakthrough in the field of quantum computing...                                                 |
+| 1   | Revolutionary AI-Powered Quantum Computer Unveiled by Tech Giant, NovaTech            | Emily Chen | March 25, 2027 | In a breakthrough announcement that is set to send shockwaves throughout the tech industry...                |
+
+## How to Run
+
+### Step 1: Generate Synthetic News Articles
+
+Run the `generate_news.py` script to generate news articles:
+
+```bash
+python generate_news.py
+```
+
+This will output a text file with the generated articles in `synthetic_dataset_generation/synthetic_news.txt`.
+
+### Step 2: Convert Generated News to CSV
+
+Once you have generated the news articles, you can convert them into a CSV file for further use by running:
+
+```bash
+python convert_to_csv_dataset.py
+```
+
+The output will be saved in `synthetic_dataset_generation/synthetic_news.csv`.
+
+## Customization
+
+- **Number of Articles**: You can change the number of news articles generated by modifying the `num_news` variable in `generate_news.py`.
+- **Topics**: You can customize the list of topics in the `generate_new` method of `generate_news.py`.
+- **CSV Output**: If you need additional fields or different formatting, modify the `convert_to_csv_dataset.py` script.
+
+## Future Enhancements
+
+- **Embedding and Retrieval**: Integrate FAISS or another retrieval system to create embeddings from the generated news articles for retrieval tasks.
+- **Additional Formats**: Support output in formats such as JSON, XML, etc.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+
